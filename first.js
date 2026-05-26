@@ -1,4 +1,4 @@
-const { log } = require('console');
+//const { log } = require('console');
 const fs=require('fs');
 fs.writeFile("output.txt","writing a file",(err)=>{
     if(err){
