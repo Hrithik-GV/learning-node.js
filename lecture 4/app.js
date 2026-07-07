@@ -10,7 +10,9 @@
 
 
 const http = require('http');
+const fs = require('fs');
 const server = http.createServer((req, res) => {
+    console.log(req.url, req.method, req.headers);
     if (req.url == '/') {
         res.setHeader('content-type', 'text/html');
         res.write(`<html>
@@ -39,6 +41,11 @@ const server = http.createServer((req, res) => {
         res.write('</html>')
         return res.end();
 
+    } else if (req.url.toLowerCase() === "/submit-details" && req.method == "POST") {
+        fs.writeFileSync('user.txt', 'hrithik');
+        res.statusCode = 302;
+        res.setHeader('Location', '/');
+        return res.end();
     }
     res.setHeader('content-type', 'text/html');
     res.write('<html>')
@@ -51,5 +58,6 @@ const PORT = 3005;
 server.listen(PORT, () => {
     console.log(`server running at http://localhost:${PORT}`);
 });
+
 
 
