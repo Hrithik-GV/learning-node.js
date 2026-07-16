@@ -1,0 +1,14 @@
+{
+  "name": "lecture-8",
+  "version": "1.0.0",
+  "description": "error and debugging",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hrithik",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
