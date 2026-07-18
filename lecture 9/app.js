@@ -7,6 +7,7 @@ const userRequest = require("./user"); //local module
 
 const app = express();
 
+//middlewares in express
 app.get("/",(req, res, next) => {
   console.log(`first middleware ${req.url} ${req.method}`);
   res.send(`<h3>sending the first middleware</h3>`)
