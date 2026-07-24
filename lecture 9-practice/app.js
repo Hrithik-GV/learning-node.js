@@ -1,45 +1,29 @@
-const http=require('http');
-const express=require('express');
+//core module
+const http = require("http");
 
+//local modeule
+const contactRouter=require('./routes/contactRouter');
+const homeRouter=require('./routes/homeRouter');
+const errorRoutes=require("./routes/errorRoutes");
 
-const app=express();
+//external module
+const express = require("express");
+const bodyParser = require("body-parser");
 
-// app.use((req,res,next)=>{
-//     console.log(`first middleware`,req.url,req.method);
-//     next();
-// })
-// app.use((req,res,next)=>{
-//     console.log(`second middleware`,req.url,req.method);
-//     next();
-// })
-// app.use((req,res,next)=>{
-//     console.log(`third middleware`,req.url,req.method);
-//     res.send(`<h2>third middleware in practice set</h2>`);
-//     next();
-// })
-app.get("/",(req,res,next)=>{
-    console.log(`home middleware`,req.url,req.method);
-    res.send(`<h2>home page<h2>`);
+const app = express();
+
+app.use((req,res,next)=>{
+      console.log( req.url, req.method);
+      next();
 })
-app.get("/contact-us",(req,res,next)=>{
-    console.log(`contact us middleware`,req.url,req.method);
-    res.send(`
-        <h2>fill the form to contact us<h2>
-        <form action="/contact-us" method="POST">
-        <input type="text" name="name" placeholder="enter your name" >
-        <input type="email" name="email" placeholder="enter your email address">
-        <input type="submit" value="submit">
-        </form>
-        `);
+app.use(homeRouter);
+// app.use(express.urlencoded());
+app.use(contactRouter);
 
-})
-app.post("/contact-us",(req,res,next)=>{
-     console.log(`contact us POST  middleware`,req.url,req.method);
-     res.send(`<h2>we will contact you soon...<h2>`)
-})
+app.use(errorRoutes);
 
-const PORT=5001;
-app.listen(PORT,()=>{
-    console.log(`server is running at http://localhost:${PORT}`)
-})
 
+const PORT = 5001;
+app.listen(PORT, () => {
+  console.log(`server is running at http://localhost:${PORT}`);
+});
