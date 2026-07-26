@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add home</title>
+    <link rel="stylesheet" href="/output.css">
 </head>
 
-<body>
+<!-- <body>
     <header>
         <h1>fill the form to add <h1></h1>
     </header>
@@ -18,6 +19,49 @@
             <input type="submit">
         </form>
     </main>
+</body> -->
+
+
+ <body class="bg-gray-100 font-sans">
+  <header class="bg-red-500 text-white p-4 shadow-md">
+    <nav class="container mx-auto flex justify-between items-center">
+      <ul class="flex space-x-4">
+        <li>
+          <a href="/" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">
+            Go to Home
+          </a>
+        </li>
+        <li>
+          <a href="/host/add-home" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">
+            Add Home
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main class="container mx-auto bg-white shadow-lg rounded-lg p-8 mt-10 max-w-xl">
+    <h2 class="text-2xl text-gray-800 font-bold text-center mb-6">
+      <header>
+        <p>fill the form to add</p>
+    </header>
+    </h2>
+
+        <form action="/host/add-home" method="POST" class="flex flex-col gap-4">
+      <input
+        type="text"
+        name="home"
+        placeholder="Enter your home here"
+        class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
+      />
+
+      <button
+        type="submit"
+  class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition duration-300 self-center w-full max-w-sm">
+        Submit
+      </button>
+    </form>
+  </main>
 </body>
+
 
 </html>

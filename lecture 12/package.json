@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "tailwind":"tailwind -i ./views/input.css -o ./public/output.css --watch",
+    "start": "nodemon app.js and npm run tailwind"
   },
   "keywords": [],
   "author": "",
