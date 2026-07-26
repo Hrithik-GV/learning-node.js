@@ -8,11 +8,15 @@ const bodyParser=require('body-parser');
 
 //local module
 const userRouter=require('./routes/userRouter');
-const hostRouter=require('./routes/hostRouter');
+const {hostRouter}=require('./routes/hostRouter');
 const rootDir=require('./utils/pathUtils');
 
 
 const app=express();
+
+// ejs setup
+app.set('view engine','ejs');
+app.set('views','views');
 
 
 

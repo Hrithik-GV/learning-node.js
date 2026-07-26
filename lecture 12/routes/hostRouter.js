@@ -20,8 +20,12 @@ hostRouter.get("/add-home",(req,res,next)=>{
 res.sendFile(path.join(rootDir,"views","addHome.html"));
 })
 
+
+const registeredHome=[];
+
 hostRouter.post("/add-home",(req,res,next)=>{
-    console.log(req.body);
+    console.log(req.body,req.body.houseName);
+    registeredHome.push({houseName:req.body.houseName});
 // res.send(`<h1> registered sucessfully <h1>
 //     <a href="/">go to home</a>
 //     `)
@@ -32,5 +36,6 @@ res.sendFile(path.join(rootDir,"views","home-added.html"));
 
 })
 
-module.exports=hostRouter;
+exports.hostRouter=hostRouter;
+exports.registeredHome=registeredHome;
 
