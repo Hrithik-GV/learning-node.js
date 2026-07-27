@@ -9,15 +9,9 @@ const hostRouter=express.Router();
 const rootDir=require('../utils/pathUtils')
 
 hostRouter.get("/add-home",(req,res,next)=>{
-// res.send(`<h1>fill the form to add <h1>
-//     <form action="/host/add-home" method="POST">
-//     <input type="text" name="home" placeholder="enter your home here">
-//     <input type="submit">
-//     </form>
-//     `)
-// next();
 
-res.sendFile(path.join(rootDir,"views","addHome.html"));
+// res.sendFile(path.join(rootDir,"views","addHome.html"));
+res.render('addHome',{Title:'add-Home page'});
 })
 
 
@@ -26,12 +20,10 @@ const registeredHome=[];
 hostRouter.post("/add-home",(req,res,next)=>{
     console.log(req.body,req.body.houseName);
     registeredHome.push({houseName:req.body.houseName});
-// res.send(`<h1> registered sucessfully <h1>
-//     <a href="/">go to home</a>
-//     `)
-// next();
 
-res.sendFile(path.join(rootDir,"views","home-added.html"));
+
+// res.sendFile(path.join(rootDir,"views","home-added.html"));
+res.render('home-added',{Title:'home-added page'});
 
 
 })

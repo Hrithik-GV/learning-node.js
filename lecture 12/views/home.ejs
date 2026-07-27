@@ -1,58 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- heading in head.ejs -->
+<%- include('partials/head') %> 
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home page</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="output.css">
+  <body class="bg-gray-100 font-sans">
+    <!-- navbar in nav.ejs  -->
+    <%- include('partials/nav') %>
 
-</head>
+    <main class="container mx-auto bg-white shadow-lg rounded-lg p-8 mt-10 max-w-xl">
+      <h2 class="text-2xl text-gray-800 font-bold text-center mb-6">
+        here are our registered homes:
+      </h2>
 
-<!-- <body>
-    <header>
-        <h2 >welcome to airbnb<h2>
+      <ul class="space-y-3">
+        <% registeredHome.forEach(home=> { %>
+          <li class="border border-gray-200 rounded-lg p-4 bg-gray-50 text-gray-700 shadow-sm">
+            <span class="font-semibold text-gray-900">
+              <%= home.houseName %>
+            </span>
+          </li>
+          <% }) %>
 
-    </header>
-    <main> <a href="/host/add-home"> add home</a></main>
-</body> -->
-
- <body class="bg-gray-100 font-sans">
-  <header class="bg-red-500 text-white p-4 shadow-md">
-    <nav class="container mx-auto flex justify-between items-center">
-      <ul class="flex space-x-4">
-        <li>
-          <a href="/" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">
-            Go to Home
-          </a>
-        </li>
-        <li>
-          <a href="/host/add-home" class="hover:bg-red-400 py-2 px-4 rounded transition duration-300">
-            Add Home
-          </a>
-        </li>
+            <% if (registeredHome.length===0) { %>
+              <li class="text-center text-gray-500 italic">
+                No homes registered yet.
+              </li>
+              <% } %>
       </ul>
-    </nav>
-  </header>
-  <main class="container mx-auto bg-white shadow-lg rounded-lg p-8 mt-10 max-w-xl">
-    <h2 class="text-2xl text-gray-800 font-bold text-center mb-6">
-      here are our registered homes:
-    </h2>
-    <ul>
-      <% registeredHome.forEach(home=>{ %>
-        <li>
-          <%= home.houseName %>
-        </li> 
-      <% }) %>
-      
-    </ul>
-  </main>
-</body>
+    </main>
+  </body>
 
 
 
-</html>
-
-
-
+  </html>
