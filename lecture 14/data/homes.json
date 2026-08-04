@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "houseName": "cozy cottage",
+    "location": "bangalore",
+    "price": "5000",
+    "rating": "4.2",
+    "photo": "https://myweekendplan.asia/wp-content/uploads/2022/12/Homestay-DGarden-Melaka-1200x900.jpg"
+  },
+  {
+    "id": "2",
+    "houseName": "beautiful house",
+    "location": "mangalore",
+    "price": "4500",
+    "rating": "4.5",
+    "photo": "https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2024/05/29140758/Gauhar-by-Stay-Vista.jpg"
+  },
+  {
+    "houseName": "luxury home",
+    "location": "bangalore",
+    "price": "5565",
+    "rating": "4.3",
+    "photo": "https://homestayssikkim.com/wp-content/uploads/2025/07/Yangsum-Village-Homestay-1-1200x900.jpg",
+    "id": "0.0019892815513846696"
+  },
+  {
+    "houseName": "new home",
+    "location": "mumbai",
+    "price": "4555",
+    "rating": "4.2",
+    "photo": "https://homestayssikkim.com/wp-content/uploads/2025/07/Yangsum-Village-Homestay-1-1200x900.jpg",
+    "id": "0.2992886960965746"
+  }
+]
