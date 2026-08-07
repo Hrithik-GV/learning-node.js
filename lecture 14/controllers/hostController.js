@@ -12,7 +12,7 @@ exports.getEditHome = (req, res, next) => {
   const editing = req.query.editing == "true";
   Home.findBy(homeId, home => {
     if (!home) {
-      console.log("homw not available");
+      console.log("home not available");
       return res.redirect("/host/host-home-list")
     }
     else {
@@ -39,7 +39,25 @@ exports.postaddHome = (req, res, next) => {
   const { houseName, location, price, rating, photo } = req.body;
   const home = new Home(houseName, location, price, rating, photo);
   home.save();
-  res.render("host/home-added", { Title: "home-added page" });
+  res.redirect("/host/host-home-list");
 };
 
+exports.postEditHome = (req, res, next) => {
+  console.log(req.body);
+  const {id, houseName, location, price, rating, photo } = req.body;
+  const home = new Home(houseName, location, price, rating, photo);
+  home.id=id;
+  home.save();
+  res.redirect("/host/host-home-list");
+};
 
+exports.postDeleteHome = (req, res, next) => {
+  const homeId = req.params.homeId;
+  console.log('deleting home of id',homeId);
+  Home.deleteBy(homeId,err=>{
+    if(err){
+      console.log(`error while deleteing ${err}`);
+    }
+    res.redirect("/host/host-home-list");
+  })
+};

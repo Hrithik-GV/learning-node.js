@@ -14,30 +14,27 @@
           </header>
         </h2>
 
-        <form action="/host/ <%= editing?" edit-home":"add-home"%></form>" method="POST" class="flex flex-col gap-4">
+        <form action="/host/<%= editing?"edit-home":"add-home"%>" method="POST" class="flex flex-col gap-4">
+          <input type="hidden" name="id" value="<%= editing?home.id:''%>">
           
-        <input type="text" value=" <%= editing? home.houseName:''%>" name="houseName" placeholder="Enter your home here"
+        <input type="text" value="<%= editing? home.houseName:''%>" name="houseName" placeholder="Enter your home here"
           class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400" />
 
-        <input type="text" value=" <%= editing? home.price:''%>" name="price" placeholder="Enter the price per night"
+        <input type="text" value="<%= editing? home.price:''%>" name="price" placeholder="Enter the price per night"
           class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400" />
 
-        <input type="text" value=" <%= editing? home.location:''%>" name="location" placeholder="Enter the location"
+        <input type="text" value="<%= editing? home.location:''%>" name="location" placeholder="Enter the location"
           class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400" />
 
-        <input type="text" value=" <%= editing? home.rating:''%>" name="rating" placeholder="Enter the rating"
+        <input type="text" value="<%= editing? home.rating:''%>" name="rating" placeholder="Enter the rating"
           class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400" />
-        <input type="text" value=" <%= editing? home.photo:''%>" name="photo" placeholder="enter photo url"
+        <input type="text" value="<%= editing? home.photo:''%>" name="photo" placeholder="enter photo url"
           class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400" />
 
-        <button type="submit"
-          class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition duration-300 self-center w-full max-w-sm">
-          <%= editing?"edit":"submit"%>
-        </button>
-
+        <input type="submit" value="<%= editing?"edit":"submit"%>" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition duration-300 self-center w-full max-w-sm"/>
+         
         </form>
       </main>
   </body>
-
-
   </html>
+
