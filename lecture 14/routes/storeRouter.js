@@ -23,5 +23,8 @@ storeRouter.get("/homes/:homeID",storeController.getHomeDetails);
 //favourite
 storeRouter.post("/favourite",storeController.postAddToFavourite);
 
+//delete favourite
+storeRouter.post("/favourite/delete/:homeId",storeController.postDeleteFavourite);
+
 //exports
 module.exports=storeRouter;

@@ -29,6 +29,9 @@
             <span class="text-gray-700">rating <%= home.rating %></span>
           </div>
         </div>
+        <form action="/favourite/delete/<%= home.id%>" method="post">
+          <button type="submit" class="bg-red-500 p-2">remove Favourite</button>
+        </form>
       </div>
     </div>
   <% }) %>
