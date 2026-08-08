@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "houseName": "cozy cottage",
+    "location": "bangalore",
+    "price": "5000",
+    "rating": "4.2",
+    "photo": "https://myweekendplan.asia/wp-content/uploads/2022/12/Homestay-DGarden-Melaka-1200x900.jpg"
+  },
+  {
+    "houseName": "hilltop",
+    "location": "mangalore",
+    "price": "4500",
+    "rating": "4.5",
+    "photo": "https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2024/05/29140758/Gauhar-by-Stay-Vista.jpg",
+    "id": "2"
+  },
+  {
+    "houseName": "luxury home",
+    "location": "bangalore",
+    "price": "5565",
+    "rating": "4.3",
+    "photo": "https://homestayssikkim.com/wp-content/uploads/2025/07/Yangsum-Village-Homestay-1-1200x900.jpg",
+    "id": "0.0019892815513846696"
+  },
+  {
+    "houseName": "utsav",
+    "location": "delhi",
+    "price": "4500",
+    "rating": "3.9",
+    "photo": "https://wallpapers.com/images/file/dream-house-pictures-1200-x-900-zhbg8xv5p7wejo9c.jpg",
+    "id": "0.9766269227948348"
+  },
+  {
+    "houseName": "farm house",
+    "location": "hassan",
+    "price": "4999",
+    "rating": "5",
+    "photo": "https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2024/05/29140758/Gauhar-by-Stay-Vista.jpg",
+    "id": "0.410563225492359"
+  }
+]
