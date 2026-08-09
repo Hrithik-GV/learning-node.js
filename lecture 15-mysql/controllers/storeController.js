@@ -2,7 +2,7 @@ const Home = require("../models/homes");
 const favourite = require("../models/favourite");
 
 exports.getIndex = (req, res, next) => {
-  Home.fetchAll((registeredHome) => {
+  Home.fetchAll().then(([registeredHome]) => {
     res.render("store/index", {
       registeredHome: registeredHome,
       Title: "index",
@@ -12,7 +12,7 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getHome = (req, res, next) => {
-  Home.fetchAll((registeredHome) => {
+  Home.fetchAll().then(([registeredHome]) => {
     res.render("store/home-list", {
       registeredHome: registeredHome,
       Title: "Home Page",
@@ -30,7 +30,7 @@ exports.getBookings = (req, res, next) => {
 
 exports.getFavourite = (req, res, next) => {
   favourite.getFavourite(favourite=>{
-    Home.fetchAll((registeredHome) => {
+      Home.fetchAll().then(([registeredHome]) => {
       const favouriteHome=registeredHome.filter(home=>favourite.includes(home.id) );
     res.render("store/favourite-list", {
       favouriteHome: favouriteHome,
@@ -55,11 +55,10 @@ exports.postAddToFavourite=(req,res,next)=>{
 
 exports.postDeleteFavourite=(req,res,next)=>{
   const homeId=req.params.homeId
- favourite.deleteBy(homeId,err=>{
-  if(err){
-    console.log("error while deleting favourites",err)
-  }
-  res.redirect("/favourite")
+ favourite.deleteBy(homeId).then(()=>{
+  res.redirect("/favourite");
+ }).catch(err=>{
+    console.log('error while deleting',err);
  })
 }
 
@@ -67,7 +66,8 @@ exports.postDeleteFavourite=(req,res,next)=>{
 exports.getHomeDetails=(req,res,next)=>{
   const homeId=req.params.homeID;
   console.log(homeId)
-  Home.findBy(homeId,home=>{
+  Home.findBy(homeId).then(([homes])=>{
+    const home=homes[0]
     if(!home){
       console.log("home not available");
       // res.redirect("/home-list");
