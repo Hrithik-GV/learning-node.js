@@ -10,22 +10,21 @@ exports.getaddHome = (req, res, next) => {
 exports.getEditHome = (req, res, next) => {
   const homeId = req.params.homeId;
   const editing = req.query.editing == "true";
-  Home.findBy(homeId).then(([homes]) => {
-    const home=homes[0]
-    if (!home) {
+  Home.findBy(homeId).then(homes => {
+    if (!homes) {
       console.log("home not available");
       return res.redirect("/host/host-home-list")
     }
     else {
       console.log('homeId:', homeId, 'query:', editing);
-      res.render("host/edit-home", { Title: "edit your home", currentPage: "addHome", editing: editing,home:home });
+      res.render("host/edit-home", { Title: "edit your home", currentPage: "addHome", editing: editing,home:homes });
     }
   })
 };
 
 
 exports.getHostHome = (req, res, next) => {
-  Home.fetchAll().then(([registeredHome]) => {
+  Home.fetchAll().then(registeredHome => {
     res.render("host/host-home-list", {
       registeredHome: registeredHome,
       Title: "host-home-list",
