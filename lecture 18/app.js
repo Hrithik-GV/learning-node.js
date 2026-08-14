@@ -31,6 +31,14 @@ app.use((req,res,next)=>{
 app.use(express.static(path.join(rootDir,"public")));
 
 app.use(express.urlencoded());
+
+app.use((req,res,next)=>{
+    
+    req.isLoggedIn=req.get('cookie')?req.get('cookie').split('=')[1]==='true':false;
+    console.log("cookie middleware",req.isLoggedIn);
+    next();
+})
+
 app.use(storeRouter);
 app.use("/host",(req,res,next)=>{
     if (req.isLoggedIn){

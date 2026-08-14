@@ -9,6 +9,12 @@ exports.getLogin = (req, res, next) => {
 
 exports.postLogin = (req, res, next) => {
     req.isLoggedIn=true;
-    res.redirect("/home-list");
-
+    res.cookie("isLoggedIn",true);
+    res.redirect("/");
 };
+
+exports.postLogout=(req,res,next)=>{
+    console.log(req.url);
+    res.cookie("isLoggedIn",false);
+    res.redirect("/login")
+}
