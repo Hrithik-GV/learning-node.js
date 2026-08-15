@@ -4,7 +4,7 @@ exports.getaddHome = (req, res, next) => {
   res.render("host/edit-home", {
     Title: "add-Home page",
     currentPage: "addHome",
-    isLoggedIn:req.isLoggedIn,
+    isLoggedIn: req.session.isLoggedIn,
     editing: false,
   });
 };
@@ -23,7 +23,7 @@ exports.getEditHome = (req, res, next) => {
         currentPage: "addHome",
         editing: editing,
         home: homes,
-        isLoggedIn:req.isLoggedIn
+        isLoggedIn: req.session.isLoggedIn,
       });
     }
   });
@@ -35,7 +35,7 @@ exports.getHostHome = (req, res, next) => {
       registeredHome: registeredHome,
       Title: "host-home-list",
       currentPage: "host-home",
-      isLoggedIn:req.isLoggedIn
+      isLoggedIn: req.session.isLoggedIn,
     });
   });
 };
@@ -59,23 +59,29 @@ exports.postaddHome = (req, res, next) => {
 
 exports.postEditHome = (req, res, next) => {
   console.log(req.body);
-  const { id, houseName, location, price, rating, photo, description } = req.body;
-  Home.findById(id).then(home=>{
-    home.houseName=houseName;
-    home.location=location;
-    home.price=price;
-    home.rating=rating;
-    home.photo=photo;
-    home.description=description;
-    home.save().then(result=>{
-      console.log("home updated",result);
-    }).catch(err=>{
-      console.log("error while updating home",err);
-    })
+  const { id, houseName, location, price, rating, photo, description } =
+    req.body;
+  Home.findById(id)
+    .then((home) => {
+      home.houseName = houseName;
+      home.location = location;
+      home.price = price;
+      home.rating = rating;
+      home.photo = photo;
+      home.description = description;
+      home
+        .save()
+        .then((result) => {
+          console.log("home updated", result);
+        })
+        .catch((err) => {
+          console.log("error while updating home", err);
+        });
       res.redirect("/host/host-home-list");
-  }).catch(err=>{
-      console.log("error while finding home",err);
-  })
+    })
+    .catch((err) => {
+      console.log("error while finding home", err);
+    });
 };
 
 exports.postDeleteHome = (req, res, next) => {
