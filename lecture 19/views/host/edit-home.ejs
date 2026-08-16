@@ -1,0 +1,45 @@
+<%- include('../partials/head') %>
+  </head>
+
+
+  <body class="bg-gray-100 font-sans">
+    <%- include('../partials/nav') %>
+
+      <main class="container mx-auto bg-white shadow-lg rounded-lg p-8 mt-10 max-w-xl">
+        <h2 class="text-2xl text-gray-800 font-bold text-center mb-6">
+          <header>
+            <p>
+              <%= editing?"edit the page":"fill the form to add"%>
+            </p>
+          </header>
+        </h2>
+
+        <form action="/host/<%= editing?"edit-home":"add-home"%>" method="POST" class="flex flex-col gap-4">
+          <input type="hidden" name="id" value="<%= editing?home._id:''%>">
+
+          <input type="text" value="<%= editing? home.houseName:''%>" name="houseName"
+            placeholder="Enter your home here"
+            class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400" />
+
+          <input type="text" value="<%= editing? home.price:''%>" name="price" placeholder="Enter the price per night"
+            class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400" />
+
+          <input type="text" value="<%= editing? home.location:''%>" name="location" placeholder="Enter the location"
+            class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400" />
+
+          <input type="text" value="<%= editing? home.rating:''%>" name="rating" placeholder="Enter the rating"
+            class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400" />
+
+          <input type="text" value="<%= editing? home.photo:''%>" name="photo" placeholder="enter photo url"
+            class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400" />
+
+          <textarea name="description" placeholder="Add the description about home" class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"><%= editing? home.description:''%> </textarea>
+
+          <input type="submit" value="<%= editing?" edit":"submit"%>" class="bg-red-500 hover:bg-red-600 text-white px-4
+          py-2 rounded transition duration-300 self-center w-full max-w-sm"/>
+
+        </form>
+      </main>
+  </body>
+
+  </html>
