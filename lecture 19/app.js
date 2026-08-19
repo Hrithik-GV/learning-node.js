@@ -31,7 +31,11 @@ app.use((req, res, next) => {
 
 const store = new mongoDBStore({
   uri: DB_URL,
-  Collection: "sessions",
+  collection: "sessions",
+});
+
+store.on("error", (error) => {
+  console.log("Session store error:", error);
 });
 
 app.use(express.static(path.join(rootDir, "public")));
@@ -64,7 +68,7 @@ app.use(authRouter);
 app.use(errorController.pageNotFound);
 
 //connections
-const PORT = 3002;
+const PORT = 3001;
 mongoose
   .connect(DB_URL)
   .then(() => {

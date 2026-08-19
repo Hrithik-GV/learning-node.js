@@ -15,9 +15,10 @@
         </h2>
 
         <form action="/login" method="POST" class="flex flex-col gap-4">
+          <%- include('../partials/error') %>
 
 
-          <input type="text" name="username" placeholder="Enter your username/email"
+          <input type="text" name="email" placeholder="Enter your email" value="<%= oldInput.email? oldInput.email:''%>"
             class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400" 
             required/>
 

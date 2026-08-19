@@ -7,12 +7,42 @@ exports.getLogin = (req, res, next) => {
     Title: "login page",
     currentPage: "login",
     isLoggedIn: false,
+    errors: [],
+    oldInput: { email: "" },
+   
   });
 };
 
-exports.postLogin = (req, res, next) => {
+exports.postLogin =  async(req, res, next) => {
+const {email,password}=req.body;
+const user= await User.findOne({email});
+  if(!user){
+    return res.status(422).render("auth/login",{
+      Title: "login page",
+    currentPage: "login",
+    isLoggedIn: false,
+    errors:['user does not exist'],
+    oldInput:{email},
+    })
+  }
+
+  const isMatch= await bcrypt.compare(password,user.password);
+  if(!isMatch){
+    return res.status(422).render("auth/login",{
+      Title: "login page",
+    currentPage: "login",
+    isLoggedIn: false,
+    errors:['wrong password'],
+    oldInput:{email}, 
+    })
+  }
+
   req.session.isLoggedIn = true;
-  res.redirect("/");
+  req.session.user = JSON.parse(JSON.stringify(user));
+    req.session.save(()=>{
+      res.redirect("/")
+    })
+  
 };
 
 exports.postLogout = (req, res, next) => {
@@ -118,3 +148,5 @@ exports.postSignup =[
       });
     })  
 }]
+
+
