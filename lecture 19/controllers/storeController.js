@@ -1,5 +1,5 @@
 const Home = require("../models/homes");
-const favourite = require("../models/favourite");
+const User=require('../models/user')
 
 exports.getIndex = (req, res, next) => {
   console.log("session value", req.session);
@@ -9,6 +9,7 @@ exports.getIndex = (req, res, next) => {
       Title: "index",
       currentPage: "index",
       isLoggedIn: req.session.isLoggedIn,
+      user:req.session.user
     });
   });
 };
@@ -20,6 +21,7 @@ exports.getHome = (req, res, next) => {
       Title: "Home Page",
       currentPage: "Home",
       isLoggedIn: req.session.isLoggedIn,
+      user:req.session.user
     });
   });
 };
@@ -29,58 +31,44 @@ exports.getBookings = (req, res, next) => {
     Title: "My Bookings",
     currentPage: "bookings",
     isLoggedIn: req.session.isLoggedIn,
+    user:req.session.user
   });
 };
 
-exports.getFavourite = (req, res, next) => {
-  favourite
-    .find()
-    .populate("homeId")
-    .then((favourite) => {
-      const favouriteHome = favourite.map((fav) => fav.homeId);
+exports.getFavourite = async (req, res, next) => {
+  const userId=req.session.user._id;
+  const user= await User.findById(userId).populate('favourite')
       res.render("store/favourite-list", {
-        favouriteHome: favouriteHome,
+        favouriteHome: user.favourite,
         Title: "My favourite",
         currentPage: "favourite",
         isLoggedIn: req.session.isLoggedIn,
+        user:req.session.user
       });
-    });
-};
+  };
 
-exports.postAddToFavourite = (req, res, next) => {
+exports.postAddToFavourite = async (req, res, next) => {
   const homeId = req.body.id;
-  favourite
-    .findOne({ homeId: homeId })
-    .then((fav) => {
-      if (fav) {
-        console.log("already marked as favourite", fav);
-      } else {
-        fav = new favourite({ homeId: homeId });
-        fav.save().then((result) => {
-          console.log("favourite added", result);
-        });
-        res.redirect("/favourite");
-      }
-    })
-    .catch((err) => {
-      console.log("error while adding favourite", err);
-    });
-};
-
-exports.postDeleteFavourite = (req, res, next) => {
-  const homeId = req.params.homeId;
-  favourite
-    .findOneAndDelete({ homeId: homeId })
-    .then((result) => {
-      console.log("favourite deleted:", result);
-    })
-    .catch((err) => {
-      console.log("error :", err);
-    })
-    .finally(() => {
+  const userId=req.session.user._id;
+  const user=await User.findById(userId);
+  if(!user.favourite.includes(homeId)){
+    user.favourite.push(homeId)
+    await user.save();
+  }
       res.redirect("/favourite");
-    });
-};
+}
+
+
+exports.postDeleteFavourite = async (req, res, next) => {
+  const homeId = req.params.homeId;
+  const userId=req.session.user._id;
+  const user=await User.findById(userId);
+    if(user.favourite.includes(homeId)){
+      user.favourite=user.favourite.filter(fav=>fav.toString()!==homeId)
+      await user.save();
+    }
+      res.redirect("/favourite");
+  }
 
 exports.getHomeDetails = (req, res, next) => {
   const homeId = req.params.homeID;
@@ -96,7 +84,9 @@ exports.getHomeDetails = (req, res, next) => {
         Title: "Home detail",
         currentPage: "Home detail",
         isLoggedIn: req.session.isLoggedIn,
+        user:req.session.user
       });
     }
   });
 };
+

@@ -9,7 +9,7 @@ exports.getLogin = (req, res, next) => {
     isLoggedIn: false,
     errors: [],
     oldInput: { email: "" },
-   
+   user:{}
   });
 };
 
@@ -23,6 +23,7 @@ const user= await User.findOne({email});
     isLoggedIn: false,
     errors:['user does not exist'],
     oldInput:{email},
+    user:{}
     })
   }
 
@@ -34,6 +35,7 @@ const user= await User.findOne({email});
     isLoggedIn: false,
     errors:['wrong password'],
     oldInput:{email}, 
+    user:{}
     })
   }
 
@@ -57,7 +59,8 @@ exports.getSignup=(req,res,next)=>{
     currentPage: "signup",
     isLoggedIn: false,
     errors:[],
-    oldInput:{firstName:"",lastName:"",email:"",password:"",confirmPassword:"",userType:"",terms:""}
+    oldInput:{firstName:"",lastName:"",email:"",password:"",confirmPassword:"",userType:"",terms:""},
+    user:{}
   });
 
 }
@@ -128,7 +131,8 @@ exports.postSignup =[
         currentPage:"signup",
         isLoggedIn:false,
         errors:errors.array().map(error=>error.msg),
-        oldInput:{firstName,lastName,email,password,confirmPassword,userType,terms}
+        oldInput:{firstName,lastName,email,password,confirmPassword,userType,terms},
+        user:{}
       });
     }
     
@@ -144,7 +148,8 @@ exports.postSignup =[
         currentPage:"signup",
         isLoggedIn:false,
         errors:[err.message],
-        oldInput:{firstName,lastName,email,password,confirmPassword,userType,terms}
+        oldInput:{firstName,lastName,email,password,confirmPassword,userType,terms},
+        user:{}
       });
     })  
 }]

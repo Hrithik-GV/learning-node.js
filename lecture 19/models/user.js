@@ -1,6 +1,7 @@
 const mongoose=require('mongoose');
 
 
+
 const userSchema =mongoose.Schema({
     firstName:{
         type:String,
@@ -22,7 +23,11 @@ const userSchema =mongoose.Schema({
         type:String,
         enum:['guest','host'],
         default:'guest'
-    }
+    },
+    favourite:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'home'
+    }]
 
 })
 
