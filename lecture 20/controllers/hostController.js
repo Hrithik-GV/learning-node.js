@@ -1,3 +1,4 @@
+const fs=require('fs');
 const Home = require("../models/homes");
 
 exports.getaddHome = (req, res, next) => {
@@ -45,9 +46,14 @@ exports.getHostHome = (req, res, next) => {
 
 exports.postaddHome = (req, res, next) => {
   console.log(req.body);
-  const { houseName, location, price, rating, photo, description } = req.body;
-  console.log(houseName, location, price, rating, photo, description)
+  const { houseName, location, price, rating, description } = req.body;
+  console.log(houseName, location, price, rating, description)
   console.log(req.file)
+  if(!req.file){
+    return res.status(422).send("no image was uploaded");
+  }
+  const photo=req.file.path;
+
   const home = new Home({
     houseName,
     location,
@@ -72,8 +78,17 @@ exports.postEditHome = (req, res, next) => {
       home.location = location;
       home.price = price;
       home.rating = rating;
-      home.photo = photo;
       home.description = description;
+
+      if (req.file) {
+        fs.unlink(home.photo, (err) => {
+          if (err) {
+            console.log("error while deleting home", err);
+          }
+        });
+        home.photo = req.file.path;
+      }
+
       home
         .save()
         .then((result) => {

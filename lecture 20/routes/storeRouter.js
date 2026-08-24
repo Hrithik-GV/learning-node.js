@@ -2,6 +2,7 @@
 const express=require('express');
 const storeRouter=express.Router();
 
+
 //local module
 const storeController=require('../controllers/storeController');
 
@@ -25,6 +26,8 @@ storeRouter.post("/favourite",storeController.postAddToFavourite);
 
 //delete favourite
 storeRouter.post("/favourite/delete/:homeId",storeController.postDeleteFavourite);
+
+storeRouter.get("/rules/:homeID",storeController.getHouseRules);
 
 //exports
 module.exports=storeRouter;

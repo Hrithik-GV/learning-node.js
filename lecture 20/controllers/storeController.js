@@ -1,3 +1,5 @@
+const path=require('path')
+const rootDir=require('../utils/pathUtils')
 const Home = require("../models/homes");
 const User=require('../models/user')
 
@@ -89,4 +91,16 @@ exports.getHomeDetails = (req, res, next) => {
     }
   });
 };
+
+exports.getHouseRules=(req,res,next)=>{
+   if(!req.session.isLoggedIn){
+    return res.redirect("/login");
+  }
+  
+  const homeId=req.params.homeID;
+
+  const rulesFileName='House Rules.pdf';
+  const filePath=path.join(rootDir,'rules',rulesFileName);
+  res.download(filePath,'rules');
+}
 

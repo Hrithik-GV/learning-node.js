@@ -38,31 +38,41 @@ const store = new mongoDBStore({
 //multer (file uploads) 
 
 const randomString=(length)=>{
-  const result='';
+  let result='';
   const characters='abcdefghijklmnopqrstuvwxyz';
-  for(let i=0;i<characters.length;i++){
-    result=result+characters.charAt(Math.floor(Math.random()*characters.length))
+  for(let i=0;i<length;i++){
+    result+=characters.charAt(Math.floor(Math.random()*characters.length))
   }
   return result;
 }
 
 const storage=multer.diskStorage({
   destination:(req,file,cb)=>{
-    cb:(null,"uploads/")
+    cb(null,"uploads/")
   },
   filename:(req,file,cb)=>{
-    cb:(null,randomString(5) + '-'+file.originalname);
+    cb(null,randomString(5) + '-'+file.originalname);
   }
 })
 
+const fileFilter=(req,file,cb)=>{
+  if(file.mimetype==='image/jpeg'||file.mimetype==='image/png'||file.mimetype==='image/jpg'){
+    cb(null,true)
+  }else{
+    cb(null,false)
+  }
+}
 const multerOptions={
-  storage
+  storage,
+  fileFilter
 }
 
 app.use(express.urlencoded());
-app.use(multer(multerOptions).single('photo'))
+app.use(multer(multerOptions).single('photo'));
 app.use(express.static(path.join(rootDir, "public")));
-
+app.use('/uploads',express.static(path.join(rootDir,"uploads")))
+app.use('/host/uploads',express.static(path.join(rootDir,"uploads")))
+app.use('/homes/uploads',express.static(path.join(rootDir,"uploads")))
 
 //sessions
 store.on("error", (error) => {
