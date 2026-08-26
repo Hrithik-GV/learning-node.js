@@ -1,12 +1,19 @@
 import TodoItem from "./TodoItem";
-function TodoItemsContainer({ todoitems,onDeleteClick }) {
+function TodoItemsContainer({ todoitems, onDeleteClick }) {
+  console.log(todoitems);
   return (
     <>
       <div className="items-container">
         {todoitems.map((items) => {
-          return <TodoItem key={items.name} tododate={items.date} todoname={items.name} onDeleteClick={onDeleteClick}></TodoItem>;
+          return (
+            <TodoItem
+              key={items.id}
+              tododate={items.duedate}
+              todoname={items.name}
+              onDeleteClick={onDeleteClick}
+            ></TodoItem>
+          );
         })}
-
       </div>
     </>
   );

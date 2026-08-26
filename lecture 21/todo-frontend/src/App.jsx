@@ -3,27 +3,25 @@ import TodoAdd from "./components/TodoAdd";
 import TodoItemsContainer from "./components/TodoItemsContainer";
 import "./App.css";
 import { useState,useRef } from "react";
+import { addItemToServer } from "../services/itemService"
 
 
 function App() {
   const initialtodoitems=[]
 
   const[todoitems,setTodoItems]=useState(initialtodoitems);
+  
+  const handleNewItem= async (itemName,itemDueDate)=>{
+    console.log(`new item added is ${itemName} and duedate is ${itemDueDate}`);
 
-  const handleNewItem=(itemName,itemDueDate)=>{
-    //console.log(`the new item :${itemName} and due date :${itemDueDate}`)
-    // const newTodo=[...todoitems,{ name:itemName,
-    // date:itemDueDate,}]
-    // setTodoItems(newTodo);
-
-    setTodoItems((currentValue)=>
-      [...currentValue,
-      {name:itemName,date:itemDueDate},
-    ]);
-    
+    const item=await addItemToServer({task:itemName,date:itemDueDate});
+    const newTodoItems=[
+      ...todoitems,
+      item
+    ];
+    setTodoItems(newTodoItems);
   };
 
-  
 
   const handleOnDelete=(todoItemName)=>{
     const newTodoItems=todoitems.filter(items=>items.name!==todoItemName);

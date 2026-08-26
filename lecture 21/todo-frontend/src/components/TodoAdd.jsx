@@ -7,13 +7,7 @@ function TodoAdd({ onNewItem }) {
   const todoNameElement = useRef();
   const dueDateElement = useRef();
 
-                                                                                                  // const handleTodoName = (event) => {
-                                                                                                  //   setTodoName(event.target.value);
-                                                                                                  
-                                                                                                  // };
-                                                                                                  // const handleTodoDate = (event) => {
-                                                                                                  //   setDueDate(event.target.value);
-                                                                                                  // };
+
 
   const handleTodoNewItem = (event) => {
     event.preventDefault();
