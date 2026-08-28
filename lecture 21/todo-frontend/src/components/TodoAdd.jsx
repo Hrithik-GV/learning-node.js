@@ -22,23 +22,26 @@ function TodoAdd({ onNewItem }) {
     
   };
   return (
-    <div className="container">
-      <form className="row kg-row" onSubmit={handleTodoNewItem}>
-        <div className="col-6">
+    <div className="container mx-auto px-4 max-w-4xl">
+      <form className="grid grid-cols-12 gap-4 my-3 items-center text-left" onSubmit={handleTodoNewItem}>
+        <div className="col-span-6">
           <input
             type="text"
             ref={todoNameElement}
             placeholder="enter todo here"
-          
-           
+            className="border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
-        <div className="col-4">
-          <input type="date" ref={dueDateElement}  />
+        <div className="col-span-4">
+          <input 
+            type="date" 
+            ref={dueDateElement}
+            className="border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500" 
+          />
         </div>
-        <div id="butn" className="col-2">
-          <button className="btn btn-success kg-butn">
-            <MdOutlineAdd />
+        <div id="butn" className="col-span-2">
+          <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded w-full flex items-center justify-center transition-colors duration-200">
+            <MdOutlineAdd className="text-xl" />
           </button>
         </div>
       </form>

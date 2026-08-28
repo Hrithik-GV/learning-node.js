@@ -1,6 +1,5 @@
 import TodoItem from "./TodoItem";
-function TodoItemsContainer({ todoitems, onDeleteClick }) {
-  console.log(todoitems);
+function TodoItemsContainer({ todoitems, onDeleteClick, onCompleteClick }) {
   return (
     <>
       <div className="items-container">
@@ -8,9 +7,12 @@ function TodoItemsContainer({ todoitems, onDeleteClick }) {
           return (
             <TodoItem
               key={items.id}
+              id={items.id}
               tododate={items.duedate}
               todoname={items.name}
+              completed={items.completed}
               onDeleteClick={onDeleteClick}
+              onCompleteClick={onCompleteClick}
             ></TodoItem>
           );
         })}

@@ -1,3 +1,4 @@
+require("dotenv").config();
 //core module
 const path = require("path");
 
@@ -5,13 +6,17 @@ const path = require("path");
 const express = require("express");
 const cors=require('cors')
 const { default: mongoose, Collection } = require("mongoose");
-const DB_URL ="mongodb+srv://hrithikgv5_db_user:KZF2RWlraBFTTdOd@airbnb.vue5kr9.mongodb.net/todo";
+
 
 //local module
+const connectDB=require('./config/db');
 const rootDir = require("./utils/pathUtils");
 const errorController = require("./controllers/error");
-const todoItemRouter=require('./routes/todoItemRouter')
+const todoItemRouter=require('./routes/todoItemRouter'); 
+
 const app = express();
+
+connectDB()
 
 //log every page url and method
 app.use((req, res, next) => {
@@ -30,15 +35,8 @@ app.use(errorController.pageNotFound);
 
 
 //connections
-const PORT = 3001;
-mongoose
-  .connect(DB_URL)
-  .then(() => {
-    console.log("connecting to mongodb");
+const PORT = process.env.PORT||3001;
     app.listen(PORT, () => {
       console.log(`http://localhost:${PORT}`);
     });
-  })
-  .catch((err) => {
-    console.log("error while connecting to mongodb", err);
-  });
+
